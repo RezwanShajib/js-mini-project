@@ -1,7 +1,7 @@
 let matA = [
     [1, 2, 3],
     [4, 5, 6],
-    [7, 8, 9, 7]
+    [7, 8, 9]
 ]
 
 let matB = [
@@ -35,7 +35,7 @@ function multiplyMatrices(matA, matB) {
     }
 
     for(let i = 0; i < matBRows; i++){
-        if(matA[i].length > matBCols){
+        if(matB[i].length > matBCols){
             matBCols = matB[i].length; //Calculating the highest number of columns in matrix A
         }
     }
@@ -52,25 +52,28 @@ function multiplyMatrices(matA, matB) {
     // console.log(matA);
     // console.log(matB);
 
-
-    let result = [] //Creating a new array to store the result of the multiplication of two matrices
-
-    for (let i = 0; i < matARows; i++) { //Iterating through the rows of the resultant matrix
-        result[i] = [] //Creating a new array to store the resultant matrix
-        for (let j = 0; j < matBCols; j++) { //Trerating through the columns of the resultant matrix
-            result[i][j] = 0 //initialize the resultant matrix with 0
-            for (let k = 0; k < matACols; k++) { //Iterating through the columns of matrix A (=rows of matrix B) 
-                result[i][j] += matA[i][k] * matB[k][j] //Multiplying the elements of matrix A and B and adding them to the resultant matrix
-            }
-                result[i][j] = result[i][j] + (matA[1][k] * matB[k][j]); //Multiplying the elements of the two matrices and adding them to the resultant matrix
-        }
-    }
-    return result; //Returning the resultant matrix
-}
     //Check Condition for multiplication of two matrices
     if(matACols != matBRows){
         console.log("Multiplication is not possible.") //If the number of columns in matrix A is not equal to the number of rows in matrix B, multiplication is not possible
+    return null; //Returning null if the multiplication is not possible
     } else{
-        let result = multiplyMatrices(matA, matB) //Calling the function to multiply the two matrices
-        console.log(result) //Printing the resultant matrix
+
+        let result = [] //Creating a new array to store the result of the multiplication of two matrices
+
+        for (let i = 0; i < matARows; i++) { //Iterating through the rows of the resultant matrix
+            result[i] = [] //Creating a new array to store the resultant matrix
+            for (let j = 0; j < matBCols; j++) { //Trerating through the columns of the resultant matrix
+                result[i][j] = 0 //initialize the resultant matrix with 0
+                for (let k = 0; k < matACols; k++) { //Iterating through the columns of matrix A (=rows of matrix B) 
+                    result[i][j] +=(matA[i][k] * matB[k][j]) //Multiplying the elements of matrix A and B and adding them to the resultant matrix
+                }
+            }
+        }
+
+        
+        console.log(result); //Printing the resultant matrix
+        return result; //Returning the resultant matrix
     }
+}
+
+multiplyMatrices(matA, matB); //Calling the function to multiply the two matrices
